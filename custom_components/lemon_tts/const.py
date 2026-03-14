@@ -8,9 +8,9 @@ CONF_DEFAULT_SPEAKER = "default_speaker"
 
 DEFAULT_SPEAKER = "Arona"
 
-# 입력 텍스트는 언어 무관, 출력은 항상 일본어
-SUPPORTED_LANGUAGES = ["ja"]
-DEFAULT_LANGUAGE = "ja"
+# 입력 텍스트는 언어 무관 (자동 번역), 출력은 항상 일본어
+SUPPORTED_LANGUAGES = ["ko", "en", "ja", "zh"]
+DEFAULT_LANGUAGE = "ko"
 
 TTS_OPTIONS = [
     "speaker_name",
