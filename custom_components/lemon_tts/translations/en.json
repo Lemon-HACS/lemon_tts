@@ -1,0 +1,37 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Lemon TTS Connection",
+        "description": "Enter your Lemon TTS server URL and API key.",
+        "data": {
+          "api_url": "Server URL",
+          "api_key": "API Key"
+        }
+      },
+      "speaker": {
+        "title": "Select Default Speaker",
+        "description": "Choose the default speaker for TTS generation.",
+        "data": {
+          "default_speaker": "Default Speaker"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to server. Check the URL and API key."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Lemon TTS Options",
+        "data": {
+          "default_speaker": "Default Speaker"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not fetch speaker list. Enter the speaker name manually."
+    }
+  }
+}
