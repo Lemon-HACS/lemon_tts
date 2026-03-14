@@ -34,8 +34,7 @@ async def async_setup_entry(
 class LemonTTSEntity(TextToSpeechEntity):
     """Lemon TTS entity."""
 
-    _attr_has_entity_name = True
-    _attr_name = None
+    _attr_name = "Lemon TTS"
 
     def __init__(self, config_entry: ConfigEntry) -> None:
         self._config_entry = config_entry
