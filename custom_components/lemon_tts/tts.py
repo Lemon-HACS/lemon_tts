@@ -5,6 +5,7 @@ import httpx
 from homeassistant.components.tts import TextToSpeechEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import (
@@ -53,12 +54,12 @@ class LemonTTSEntity(TextToSpeechEntity):
         return TTS_OPTIONS
 
     @property
-    def device_info(self):
-        return {
-            "identifiers": {(DOMAIN, self._config_entry.entry_id)},
-            "name": "Lemon TTS",
-            "manufacturer": "Lemon",
-        }
+    def device_info(self) -> DeviceInfo:
+        return DeviceInfo(
+            identifiers={(DOMAIN, self._config_entry.entry_id)},
+            name="Lemon TTS",
+            manufacturer="Lemon",
+        )
 
     def _get_default_speaker(self) -> str:
         return self._config_entry.options.get(
