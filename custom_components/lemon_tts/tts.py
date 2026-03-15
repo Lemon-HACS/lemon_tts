@@ -11,11 +11,11 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from .const import (
     CONF_API_KEY,
     CONF_API_URL,
-    CONF_MUTE_ENTITY,
-    CONF_MUTE_STATE,
+    CONF_ENABLE_ENTITY,
+    CONF_ENABLE_STATE,
     CONF_SPEAKERS,
     DEFAULT_LANGUAGE,
-    DEFAULT_MUTE_STATE,
+    DEFAULT_ENABLE_STATE,
     DOMAIN,
     SUPPORTED_LANGUAGES,
     TTS_OPTIONS,
@@ -93,15 +93,15 @@ class LemonTTSEntity(TextToSpeechEntity):
         options = options or {}
         data = self._config_entry.data
 
-        # Mute 체크: 설정된 엔티티가 있고 상태가 활성화 상태가 아니면 스킵
-        mute_entity = data.get(CONF_MUTE_ENTITY, "")
-        if mute_entity:
-            mute_state = data.get(CONF_MUTE_STATE, DEFAULT_MUTE_STATE)
-            entity_state = self.hass.states.get(mute_entity)
-            if entity_state is not None and entity_state.state != mute_state:
+        # TTS 활성화 체크: 설정된 엔티티가 있고 상태가 활성화 상태가 아니면 스킵
+        enable_entity = data.get(CONF_ENABLE_ENTITY, "")
+        if enable_entity:
+            enable_state = data.get(CONF_ENABLE_STATE, DEFAULT_ENABLE_STATE)
+            entity_state = self.hass.states.get(enable_entity)
+            if entity_state is not None and entity_state.state != enable_state:
                 _LOGGER.debug(
-                    "[LemonTTS] Muted by %s (state=%s, expected=%s). Skipping.",
-                    mute_entity, entity_state.state, mute_state,
+                    "[LemonTTS] TTS disabled by %s (state=%s, expected=%s). Skipping.",
+                    enable_entity, entity_state.state, enable_state,
                 )
                 return None, None
 

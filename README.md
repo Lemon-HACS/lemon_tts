@@ -10,7 +10,7 @@ Home Assistant용 커스텀 TTS(Text-to-Speech) 통합 구성요소입니다.
 - **자동 번역**: 한국어, 영어 등 어떤 언어로 입력해도 자동으로 일본어로 번역 후 TTS 생성
 - **화자별 엔티티**: API에서 화자 목록을 자동 조회하여 각 화자마다 독립된 TTS 엔티티 생성
 - **Assist 파이프라인 연동**: 파이프라인별로 다른 화자를 지정 가능 (A 어시스턴트 → Arona, B 어시스턴트 → Elaina)
-- **전체 Mute**: HA 엔티티 하나로 모든 TTS 출력을 일괄 ON/OFF (자동화 수정 불필요)
+- **TTS 일괄 ON/OFF**: HA 엔티티 하나로 모든 TTS 출력을 일괄 ON/OFF (자동화 수정 불필요)
 - **세밀한 음성 조절**: 리듬, 감정, 속도, 스타일 등 다양한 파라미터를 옵션으로 전달 가능
 - **UI 기반 설정**: `configuration.yaml` 수정 없이 Home Assistant UI에서 바로 설정
 - **HACS 지원**: HACS를 통해 간단하게 설치 및 업데이트 가능
@@ -44,8 +44,8 @@ Home Assistant용 커스텀 TTS(Text-to-Speech) 통합 구성요소입니다.
 |---|---|---|
 | **서버 주소** | ✅ | Lemon TTS API 서버의 base URL (예: `https://your-server.example.com`) |
 | **API 키** | ✅ | Bearer 인증에 사용하는 API 키 |
-| **Mute 엔티티** | ❌ | TTS ON/OFF를 제어할 엔티티 ID. 비워두면 항상 재생됩니다. (예: `input_boolean.tts_enabled`) |
-| **Mute 활성화 상태** | ❌ | 위 엔티티의 상태값이 이 값일 때 TTS가 재생됩니다. (기본값: `on`) |
+| **TTS 활성화 엔티티** | ❌ | TTS ON/OFF를 제어할 엔티티 ID. 비워두면 항상 재생됩니다. (예: `input_boolean.tts_enabled`) |
+| **TTS 활성화 상태** | ❌ | 위 엔티티의 상태값이 이 값일 때 TTS가 재생됩니다. (기본값: `on`) |
 
 서버 주소와 API 키를 입력하면 화자 목록을 자동으로 불러오고, 각 화자마다 TTS 엔티티가 생성됩니다.
 
@@ -53,22 +53,22 @@ Home Assistant용 커스텀 TTS(Text-to-Speech) 통합 구성요소입니다.
 
 ---
 
-## 전체 Mute 기능
+## TTS 일괄 ON/OFF 기능
 
-Mute 엔티티를 설정하면 해당 엔티티 상태에 따라 모든 TTS 출력을 일괄 제어할 수 있습니다.
+TTS 활성화 엔티티를 설정하면 해당 엔티티 상태에 따라 모든 TTS 출력을 일괄 제어할 수 있습니다.
 기존 자동화를 수정할 필요 없이 컴포넌트 내부에서 처리됩니다.
 
 ### 설정 예시 (`input_boolean` 사용)
 
 1. **헬퍼 생성**: 설정 → 기기 및 서비스 → 헬퍼 → `input_boolean` 생성 (예: entity_id `input_boolean.tts_enabled`)
-2. **Lemon TTS 재설정**: Mute 엔티티에 `input_boolean.tts_enabled`, 활성화 상태에 `on` 입력
+2. **Lemon TTS 재설정**: TTS 활성화 엔티티에 `input_boolean.tts_enabled`, 활성화 상태에 `on` 입력
 3. **대시보드에 토글 카드 추가** (선택)
 
 ### 동작 방식
 
 | 상황 | 동작 |
 |------|------|
-| Mute 엔티티 미설정 | 항상 정상 재생 |
+| TTS 활성화 엔티티 미설정 | 항상 정상 재생 |
 | 엔티티 상태 = 활성화 상태 | 정상 재생 |
 | 엔티티 상태 ≠ 활성화 상태 | TTS 스킵 (API 호출 없음) |
 | 엔티티가 HA에 존재하지 않음 | 정상 재생 (fail-open) |

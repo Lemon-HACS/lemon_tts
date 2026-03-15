@@ -7,30 +7,30 @@
         "data": {
           "api_url": "서버 주소",
           "api_key": "API 키",
-          "mute_entity": "Mute 엔티티",
-          "mute_state": "Mute 활성화 상태"
+          "enable_entity": "TTS 활성화 엔티티",
+          "enable_state": "TTS 활성화 상태"
         },
         "data_description": {
           "api_url": "Lemon TTS API 서버의 base URL (예: https://your-server.example.com)",
           "api_key": "Bearer 인증에 사용하는 API 키",
-          "mute_entity": "TTS ON/OFF를 제어할 엔티티 ID. 비워두면 항상 재생됩니다. (예: input_boolean.tts_enabled)",
-          "mute_state": "위 엔티티의 상태값이 이 값일 때 TTS가 재생됩니다. (기본값: on)"
+          "enable_entity": "TTS ON/OFF를 제어할 엔티티 ID. 비워두면 항상 재생됩니다. (예: input_boolean.tts_enabled)",
+          "enable_state": "위 엔티티의 상태값이 이 값일 때 TTS가 재생됩니다. (기본값: on)"
         }
       },
       "reconfigure": {
         "title": "Lemon TTS 재설정",
-        "description": "서버 주소, API 키, Mute 설정을 변경할 수 있습니다.",
+        "description": "서버 주소, API 키, TTS 활성화 설정을 변경할 수 있습니다.",
         "data": {
           "api_url": "서버 주소",
           "api_key": "API 키",
-          "mute_entity": "Mute 엔티티",
-          "mute_state": "Mute 활성화 상태"
+          "enable_entity": "TTS 활성화 엔티티",
+          "enable_state": "TTS 활성화 상태"
         },
         "data_description": {
           "api_url": "Lemon TTS API 서버의 base URL (예: https://your-server.example.com)",
           "api_key": "Bearer 인증에 사용하는 API 키",
-          "mute_entity": "TTS ON/OFF를 제어할 엔티티 ID. 비워두면 항상 재생됩니다. (예: input_boolean.tts_enabled)",
-          "mute_state": "위 엔티티의 상태값이 이 값일 때 TTS가 재생됩니다. (기본값: on)"
+          "enable_entity": "TTS ON/OFF를 제어할 엔티티 ID. 비워두면 항상 재생됩니다. (예: input_boolean.tts_enabled)",
+          "enable_state": "위 엔티티의 상태값이 이 값일 때 TTS가 재생됩니다. (기본값: on)"
         }
       }
     },

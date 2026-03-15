@@ -7,30 +7,30 @@
         "data": {
           "api_url": "Server URL",
           "api_key": "API Key",
-          "mute_entity": "Mute Entity",
-          "mute_state": "Mute Active State"
+          "enable_entity": "TTS Enable Entity",
+          "enable_state": "TTS Active State"
         },
         "data_description": {
           "api_url": "Base URL of the Lemon TTS API server (e.g. https://your-server.example.com)",
           "api_key": "API key used for Bearer authentication",
-          "mute_entity": "Entity ID to control TTS ON/OFF. Leave empty to always play. (e.g. input_boolean.tts_enabled)",
-          "mute_state": "TTS plays when the entity state matches this value. (default: on)"
+          "enable_entity": "Entity ID to control TTS ON/OFF. Leave empty to always play. (e.g. input_boolean.tts_enabled)",
+          "enable_state": "TTS plays when the entity state matches this value. (default: on)"
         }
       },
       "reconfigure": {
         "title": "Reconfigure Lemon TTS",
-        "description": "Update server URL, API key, or mute settings.",
+        "description": "Update server URL, API key, or TTS enable settings.",
         "data": {
           "api_url": "Server URL",
           "api_key": "API Key",
-          "mute_entity": "Mute Entity",
-          "mute_state": "Mute Active State"
+          "enable_entity": "TTS Enable Entity",
+          "enable_state": "TTS Active State"
         },
         "data_description": {
           "api_url": "Base URL of the Lemon TTS API server (e.g. https://your-server.example.com)",
           "api_key": "API key used for Bearer authentication",
-          "mute_entity": "Entity ID to control TTS ON/OFF. Leave empty to always play. (e.g. input_boolean.tts_enabled)",
-          "mute_state": "TTS plays when the entity state matches this value. (default: on)"
+          "enable_entity": "Entity ID to control TTS ON/OFF. Leave empty to always play. (e.g. input_boolean.tts_enabled)",
+          "enable_state": "TTS plays when the entity state matches this value. (default: on)"
         }
       }
     },
