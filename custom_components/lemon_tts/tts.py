@@ -1,5 +1,7 @@
 """Lemon TTS platform."""
+import io
 import logging
+import wave
 
 import httpx
 from homeassistant.components.tts import TextToSpeechEntity
@@ -22,6 +24,17 @@ from .const import (
 )
 
 _LOGGER = logging.getLogger(__name__)
+
+
+def _generate_silence() -> bytes:
+    """0.1초 무음 WAV 데이터를 생성합니다."""
+    buf = io.BytesIO()
+    with wave.open(buf, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(22050)
+        w.writeframes(b"\x00\x00" * 2205)
+    return buf.getvalue()
 
 
 async def async_setup_entry(
@@ -100,10 +113,10 @@ class LemonTTSEntity(TextToSpeechEntity):
             entity_state = self.hass.states.get(enable_entity)
             if entity_state is not None and entity_state.state != enable_state:
                 _LOGGER.debug(
-                    "[LemonTTS] TTS disabled by %s (state=%s, expected=%s). Skipping.",
+                    "[LemonTTS] TTS disabled by %s (state=%s, expected=%s). Returning silence.",
                     enable_entity, entity_state.state, enable_state,
                 )
-                return None, None
+                return "wav", _generate_silence()
 
         api_url = data[CONF_API_URL].rstrip("/")
         api_key = data[CONF_API_KEY]
