@@ -6,7 +6,31 @@
         "description": "Enter your Lemon TTS server URL and API key. Speaker list will be fetched automatically and a TTS entity will be created for each speaker.",
         "data": {
           "api_url": "Server URL",
-          "api_key": "API Key"
+          "api_key": "API Key",
+          "mute_entity": "Mute Entity",
+          "mute_state": "Mute Active State"
+        },
+        "data_description": {
+          "api_url": "Base URL of the Lemon TTS API server (e.g. https://your-server.example.com)",
+          "api_key": "API key used for Bearer authentication",
+          "mute_entity": "Entity ID to control TTS ON/OFF. Leave empty to always play. (e.g. input_boolean.tts_enabled)",
+          "mute_state": "TTS plays when the entity state matches this value. (default: on)"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Lemon TTS",
+        "description": "Update server URL, API key, or mute settings.",
+        "data": {
+          "api_url": "Server URL",
+          "api_key": "API Key",
+          "mute_entity": "Mute Entity",
+          "mute_state": "Mute Active State"
+        },
+        "data_description": {
+          "api_url": "Base URL of the Lemon TTS API server (e.g. https://your-server.example.com)",
+          "api_key": "API key used for Bearer authentication",
+          "mute_entity": "Entity ID to control TTS ON/OFF. Leave empty to always play. (e.g. input_boolean.tts_enabled)",
+          "mute_state": "TTS plays when the entity state matches this value. (default: on)"
         }
       }
     },

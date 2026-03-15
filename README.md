@@ -44,8 +44,8 @@ Home Assistant용 커스텀 TTS(Text-to-Speech) 통합 구성요소입니다.
 |---|---|---|
 | **서버 주소** | ✅ | Lemon TTS API 서버의 base URL (예: `https://your-server.example.com`) |
 | **API 키** | ✅ | Bearer 인증에 사용하는 API 키 |
-| **Mute 엔티티** | ❌ | TTS ON/OFF를 제어할 HA 엔티티 ID (예: `input_boolean.tts_enabled`) |
-| **Mute 활성화 상태** | ❌ | Mute 엔티티의 "TTS 켜짐" 상태값 (기본값: `on`) |
+| **Mute 엔티티** | ❌ | TTS ON/OFF를 제어할 엔티티 ID. 비워두면 항상 재생됩니다. (예: `input_boolean.tts_enabled`) |
+| **Mute 활성화 상태** | ❌ | 위 엔티티의 상태값이 이 값일 때 TTS가 재생됩니다. (기본값: `on`) |
 
 서버 주소와 API 키를 입력하면 화자 목록을 자동으로 불러오고, 각 화자마다 TTS 엔티티가 생성됩니다.
 
