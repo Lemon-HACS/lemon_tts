@@ -8,7 +8,10 @@ from homeassistant import config_entries
 from .const import (
     CONF_API_KEY,
     CONF_API_URL,
+    CONF_MUTE_ENTITY,
+    CONF_MUTE_STATE,
     CONF_SPEAKERS,
+    DEFAULT_MUTE_STATE,
     DOMAIN,
 )
 
@@ -49,6 +52,8 @@ class LemonTTSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                             CONF_API_URL: user_input[CONF_API_URL],
                             CONF_API_KEY: user_input[CONF_API_KEY],
                             CONF_SPEAKERS: speakers,
+                            CONF_MUTE_ENTITY: user_input.get(CONF_MUTE_ENTITY, ""),
+                            CONF_MUTE_STATE: user_input.get(CONF_MUTE_STATE, DEFAULT_MUTE_STATE),
                         },
                     )
             except Exception:
@@ -61,6 +66,8 @@ class LemonTTSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 {
                     vol.Required(CONF_API_URL): str,
                     vol.Required(CONF_API_KEY): str,
+                    vol.Optional(CONF_MUTE_ENTITY, default=""): str,
+                    vol.Optional(CONF_MUTE_STATE, default=DEFAULT_MUTE_STATE): str,
                 }
             ),
             errors=errors,
@@ -84,6 +91,8 @@ class LemonTTSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                             CONF_API_URL: user_input[CONF_API_URL],
                             CONF_API_KEY: user_input[CONF_API_KEY],
                             CONF_SPEAKERS: speakers,
+                            CONF_MUTE_ENTITY: user_input.get(CONF_MUTE_ENTITY, ""),
+                            CONF_MUTE_STATE: user_input.get(CONF_MUTE_STATE, DEFAULT_MUTE_STATE),
                         },
                     )
             except Exception:
@@ -96,6 +105,8 @@ class LemonTTSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 {
                     vol.Required(CONF_API_URL, default=entry.data.get(CONF_API_URL, "")): str,
                     vol.Required(CONF_API_KEY, default=entry.data.get(CONF_API_KEY, "")): str,
+                    vol.Optional(CONF_MUTE_ENTITY, default=entry.data.get(CONF_MUTE_ENTITY, "")): str,
+                    vol.Optional(CONF_MUTE_STATE, default=entry.data.get(CONF_MUTE_STATE, DEFAULT_MUTE_STATE)): str,
                 }
             ),
             errors=errors,
