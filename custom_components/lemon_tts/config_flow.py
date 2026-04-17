@@ -10,7 +10,6 @@ from .const import (
     CONF_API_URL,
     CONF_ENABLE_ENTITY,
     CONF_ENABLE_STATE,
-    CONF_SPEAKERS,
     DEFAULT_ENABLE_STATE,
     DOMAIN,
 )
@@ -51,7 +50,6 @@ class LemonTTSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         data={
                             CONF_API_URL: user_input[CONF_API_URL],
                             CONF_API_KEY: user_input[CONF_API_KEY],
-                            CONF_SPEAKERS: speakers,
                             CONF_ENABLE_ENTITY: user_input.get(CONF_ENABLE_ENTITY, ""),
                             CONF_ENABLE_STATE: user_input.get(CONF_ENABLE_STATE, DEFAULT_ENABLE_STATE),
                         },
@@ -90,7 +88,6 @@ class LemonTTSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         data={
                             CONF_API_URL: user_input[CONF_API_URL],
                             CONF_API_KEY: user_input[CONF_API_KEY],
-                            CONF_SPEAKERS: speakers,
                             CONF_ENABLE_ENTITY: user_input.get(CONF_ENABLE_ENTITY, ""),
                             CONF_ENABLE_STATE: user_input.get(CONF_ENABLE_STATE, DEFAULT_ENABLE_STATE),
                         },

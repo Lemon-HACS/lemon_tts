@@ -15,7 +15,6 @@ from .const import (
     CONF_API_URL,
     CONF_ENABLE_ENTITY,
     CONF_ENABLE_STATE,
-    CONF_SPEAKERS,
     DEFAULT_LANGUAGE,
     DEFAULT_ENABLE_STATE,
     DOMAIN,
@@ -37,28 +36,31 @@ def _generate_silence() -> bytes:
     return buf.getvalue()
 
 
+async def _fetch_speakers(api_url: str, api_key: str) -> list[str]:
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            f"{api_url.rstrip('/')}/api/tts/speakers",
+            headers={"Authorization": f"Bearer {api_key}"},
+            timeout=10,
+        )
+    if response.status_code != 200:
+        return []
+    return response.json().get("speakers", [])
+
+
 async def async_setup_entry(
     hass: HomeAssistant,
     config_entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up one TTS entity per speaker."""
+    """Set up one TTS entity per speaker (화자 목록은 항상 서버에서 조회)."""
     data = config_entry.data
-    speakers: list[str] = data.get(CONF_SPEAKERS, [])
 
-    # 캐시된 화자 목록이 없으면 API에서 새로 조회
-    if not speakers:
-        try:
-            async with httpx.AsyncClient() as client:
-                response = await client.get(
-                    f"{data[CONF_API_URL].rstrip('/')}/api/tts/speakers",
-                    headers={"Authorization": f"Bearer {data[CONF_API_KEY]}"},
-                    timeout=10,
-                )
-            if response.status_code == 200:
-                speakers = response.json().get("speakers", [])
-        except Exception as e:
-            _LOGGER.error("[LemonTTS] Failed to fetch speakers: %s", e)
+    try:
+        speakers = await _fetch_speakers(data[CONF_API_URL], data[CONF_API_KEY])
+    except Exception as e:
+        _LOGGER.error("[LemonTTS] Failed to fetch speakers: %s", e)
+        return
 
     if not speakers:
         _LOGGER.error("[LemonTTS] No speakers available, cannot set up entities.")
@@ -126,13 +128,10 @@ class LemonTTSEntity(TextToSpeechEntity):
             "speaker_name": self._speaker_name,
         }
 
-        for key in ("sdp_ratio", "noise", "noisew", "length", "style_weight"):
-            if key in options:
-                params[key] = options[key]
-
-        for key in ("style_text", "translation_prompt"):
-            if options.get(key):
-                params[key] = options[key]
+        if "speed" in options:
+            params["speed"] = options["speed"]
+        if options.get("translation_prompt"):
+            params["translation_prompt"] = options["translation_prompt"]
 
         _LOGGER.info(
             "[LemonTTS] speaker=%s, text=%.80s", self._speaker_name, message
